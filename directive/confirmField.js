@@ -4,7 +4,7 @@
 * This directive compares the current model against a specified model value.
 * The element will be marked as invalid if the two values do not match
 */
-angular.module('wn.core.confirmField.directive', [])
+angular.module('wn.common.confirmField', [])
 
 .directive('confirmField', function () {
   return {

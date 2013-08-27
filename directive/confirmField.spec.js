@@ -7,7 +7,7 @@ describe('Testing the confirm field directive', function () {
   var element, scope, form;
 
 
-  beforeEach(module('wn.core.confirmField.directive'));
+  beforeEach(module('wn.common.confirmField'));
   beforeEach(module('templates-app'));
 
   beforeEach(inject(function ($rootScope, $compile) {
