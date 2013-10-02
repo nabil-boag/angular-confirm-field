@@ -1,3 +1,5 @@
+/* global angular */
+
 /**
 * Confirm field directive
 *
@@ -33,7 +35,7 @@ angular.module('wn.common.confirmField', [])
 
       // Sets an invalid state given two unmatching, defined values. 
       var checkMatch = function (val1, val2) {
-        if(val1 != val2 && val1 !== undefined && val2 !== undefined) {
+        if(val1 !== val2 && val1 !== undefined && val2 !== undefined) {
           controller.$setValidity('noMatch', false);
         } else {
           controller.$setValidity('noMatch', true);
