@@ -98,7 +98,7 @@ module.exports = function ( grunt ) {
     },
 
     html2js: {
-      app: {
+      tempo-confirm-field: {
         options: {
           base: 'app/src/modules'
         },
