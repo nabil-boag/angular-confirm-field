@@ -1,98 +1,131 @@
 /* global describe, beforeEach, it, expect, inject, angular, module */
 
 /**
-* Tests the confirm field directive.
-*/
-describe('Testing the confirm field directive', function () {
+ * Tests the confirm field directive.
+ */
+describe('The confirm field directive', function () {
 
   // Begin setup.
-  var element, scope, form;
+  var element, $scope, compiled;
 
+  beforeEach(module('tempo.common'));
 
-  beforeEach(module('wn.common.confirmField'));
-  beforeEach(module('templates-app'));
+  beforeEach(inject(function ($compile, $rootScope) {
+    // Arrange.
 
-  beforeEach(inject(function ($rootScope, $compile) {
+    // Get a new scope from rootscope
+    $scope = $rootScope.$new();
 
-  // Arrange.
-  scope = $rootScope;
-  scope.comparison = 'test123';
+    // Add the compare-against property to the scope.
+    $scope.compareField = 'test123';
 
-  element = angular.element(
-    '<form id="form" name="form">' + 
-      '<input name="confirmfield" ng-model="confirmvalue" confirm-field ' + 
-        'confirm-against="comparison" next-focus-id="next" maxlength="2"/>' + 
-    '</form>');
+    // Create an ng-confirm-field HTML Element
+    var html = '<form id="form" name="form">' +
+      '<input name="confirmField" ng-model="confirmvalue" ng-confirm-field ' +
+      'confirm-against="compareField"/>' +
+      '</form>';
 
-    $compile(element)(scope);
-    
-    form = scope.form;
-
+    // Create an element out of the HTML.
+    element = angular.element(html);
+    // Compile the element.
+    compiled = $compile(element);
+    // Add the compiled element to the scope.
+    compiled($scope);
+    // Digest(Update) the scope.
+    $scope.$digest();
   }));
 
   /**
-  * Tests that if we're comparing the confirm field against a value, if that
-  * value is entered into the confirm field then the field will pass form
-  * validation.
-  */
+   * Tests that if we're comparing the confirm field against a value, if that
+   * value is entered into the confirm field then the field will pass form
+   * validation.
+   */
   it('should be valid if the confirm field matches the original value',
     inject(function () {
-    
-    // Arrange.
-    var testValue = 'test123';
 
-    // Act.    
-    form.confirmfield.$setViewValue(testValue);
-    scope.$digest();
-    
-    // Assert. 
-    expect(form.confirmfield.$valid).toBe(true);
-
-  }));
-
-    /**
-    * Tests that if we're comparing the confirm field against a value, if
-    * another value is entered into the confirm field then the field should not
-    * pass validation.
-    */
-    it('should be invalid if the confirm field does not match the ' + 
-      'original value', inject(function () {
-    
-    // Arrange.
-    var testValue = 'test';
-
-    // Act.    
-    form.confirmfield.$setViewValue(testValue);
-    scope.$digest();
-
-    // Assert. 
-    expect(form.confirmfield.$valid).toBe(false);
-
-  }));
-
-    /**
-    * Tests that if confirm the value in the confirm text field and then change
-    * the original value then the confirm field should become invalid.
-    */
-    it('should become invalid if I change the original email value after ' + 
-      'confirming', inject(function() {
       // Arrange.
       var testValue = 'test123';
+      // Change the confirm field to a value matching the compai
+      $scope.form.confirmField.$setViewValue(testValue);
 
-      // Act.    
-      form.confirmfield.$setViewValue(testValue);
-      scope.$digest();
-      
-      // Assert that the field passes validation.
-      expect(form.confirmfield.$valid).toBe(true);
+      // Act.
+      $scope.$apply();
 
-      // Act. Change the original value
-      scope.comparison = 'newvalue';
-      scope.$digest();
+      // Assert that the confirm field is valid.
+      expect($scope.form.confirmField.$valid).toBe(true);
 
-      // Assert that the fields now fail validation
-      expect(form.confirmfield.$valid).toBe(false);
     }));
 
-});
+  /**
+   * Tests that the confirm field becomes invalid when the confirm field
+   * is set to a value that doesn't match the compare against field.
+   */
+  it('should be invalid if I change the the confirm field and it doesn\'t ' +
+    'match the compare against field.', inject(function () {
 
+      // Arrange.
+      var testValue = 'test';
+      // Change the compare field to a non matching value
+      $scope.form.confirmField.$setViewValue(testValue);
+
+      // Act.
+      $scope.$apply();
+
+      // Assert that the confirm field is invalid.
+      expect($scope.form.confirmField.$valid).toBe(false);
+
+    }));
+
+  /**
+   * Tests that the confirm field becomes invalid when the compare field
+   * is set to a value that doesn't match.
+   */
+  it('should be invalid if I change the the compare against field and it ' +
+    'doesn\'t match the compare field.', inject(function () {
+
+      // Arrange.
+      var testValue = 'test123';
+      // Change the compare field to a non matching value
+      $scope.compareField = 'newvalue';
+      $scope.form.confirmField.$setViewValue(testValue);
+
+      // Act.
+      $scope.$apply();
+
+      // Assert that the confirm field is invalid.
+      expect($scope.form.confirmField.$valid).toBe(false);
+    }));
+
+  /**
+   *
+   * Tests that the confirm field becomes invalid after being valid.
+   *
+   *  - Set a matching value into the confirm field
+   *  - Assert that the confirm field is invalid
+   *  - Set a differing value into the compare against field
+   *  - Assert that the confirm field has become valid
+   */
+  it('should become invalid if I change the compare against field after the ' +
+    'cofirm field was already valid.', inject(function () {
+      // Arrange.
+      var testValue = 'test123';
+      // Change the compare field to a matching value
+      $scope.form.confirmField.$setViewValue(testValue);
+
+      // Act.
+      $scope.$apply();
+
+      // Assert that the confirm field is valid.
+      expect($scope.form.confirmField.$valid).toBe(true);
+
+      // Arrange.
+      // Change the compare field to a non matching value
+      $scope.compareField = 'newvalue';
+
+      // Act.
+      $scope.$apply();
+
+      // Assert that the confirm field is invalid.
+      expect($scope.form.confirmField.$valid).toBe(false);
+    }));
+});

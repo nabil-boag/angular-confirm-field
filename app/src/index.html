@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Paylater Rush</title>
+  <head>
+    <meta charset="utf-8">
+    <title>Tempo confirm-field</title>
 
-    <!-- build:js(app/build) js/confirm-field.min.js -->
-    <script src="confirmField.js"></script>
+    <% vendorFiles.forEach(function (file) { %>
+    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+    <!-- Uncomment if you have some templates.
     <script src="js/templates.js"></script>
+    -->
+    <!-- build:js(app/build) js/tempo-confirm-field.min.js -->
+    <% appFiles.forEach(function (file) { %>
+    <script type="text/javascript" src="<%= file %>"></script><% }); %>
     <!-- endbuild -->
-</head>
-<body >
-</body>
+
+    <script>
+      var app = angular.module('demo', ['tempo.common'])
+        .controller('demoCtrl', ['$scope', function ($scope) {
+          $scope.confirm = '';
+        }]);
+    </script>
+    <style>
+      #form input.ng-valid {
+        color: green;
+      }
+      #form input.ng-invalid {
+        color: red;
+      }
+      #form.ng-valid {
+        background: green;
+      }
+      #form.ng-invalid {
+        background: red;
+      }
+    </style>
+  </head>
+  <body ng-app="demo" ng-controller="demoCtrl">
+    <form id="form" name="form">
+      <input name="email" ng-model="email"  />
+      <input name="confirm" ng-model="confirm" ng-confirm-field confirm-against="email" />
+    </form>
+  </body>
 </html>
+

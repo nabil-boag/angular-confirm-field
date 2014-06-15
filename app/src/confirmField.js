@@ -1,46 +1,50 @@
 /* global angular */
 
 /**
-* Confirm field directive
-*
-* This directive compares the current model against a specified model value.
-* The element will be marked as invalid if the two values do not match
-*/
-angular.module('wn.common.confirmField', [])
+ * @file Declares a confirm field directive to confirm two models to match.
+ */
 
-.directive('confirmField', function () {
+angular.module('tempo.common', [])
+
+/**
+ * This directive compares the current model against a specified model value.
+ * The element, and the form will be marked as invalid if the two values do not
+ * match.
+ */
+.directive('ngConfirmField', function () {
   return {
-
     require: 'ngModel',
-
     scope: {
-      confirmAgainst: '='
+      confirmAgainst: '=',
+      model: '=ngModel'
     },
-
     link: function (scope, element, attributes, controller) {
 
-      var confirmValue;
-
-      // This checks the confirm field value against the "original" value
-      scope.$watch(attributes.ngModel , function( val ) {
-        confirmValue = val;
+      // Watch for changes in the directive's model.
+      scope.$watch("model", function (val) {
+        // There was a change in the directive model so check if it matches
+        // the value in the confirmAgainst model.
         checkMatch(val, scope.confirmAgainst);
       });
 
-      // This watches the original value, if there's changes in this, we need
-      // to revalidate
-      scope.$watch('confirmAgainst' , function( val ) {
-        checkMatch(val, confirmValue);
+      // Watche the confirmAgainst model for changes.
+      scope.$watch('confirmAgainst', function (val) {
+        // There was a change in the confirmAgainst model so check if it
+        // matches the value in the directive model
+        checkMatch(val, scope.model);
       });
 
-      // Sets an invalid state given two unmatching, defined values. 
+      /**
+       * Compares two values to see if they match. If they match, mark the
+       * controller as valid, otherwise set it to be invalid.
+       */
       var checkMatch = function (val1, val2) {
-        if(val1 !== val2 && val1 !== undefined && val2 !== undefined) {
+        if (val1 !== val2 && val1 !== undefined && val2 !== undefined) {
           controller.$setValidity('noMatch', false);
         } else {
           controller.$setValidity('noMatch', true);
         }
       };
     }
-  };  
+  };
 });
