@@ -21,9 +21,21 @@ module.exports = function(config) {
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'confirmField.js',
-      'js/templates.js',
       '**/*.spec.js'
     ],
+    preprocessors: {
+      './**/*.js': 'coverage'
+    },
+
+    /**
+     * How to report, by default.
+     */
+    reporters: ['coverage', 'dots'],
+
+    coverageReporter:  {
+      type : 'html',
+      dir : '../../coverage/'
+    },
 
     singleRun: true,
     browsers: [
