@@ -123,7 +123,7 @@ module.exports = function ( grunt ) {
     },
 
     html2js: {
-      'tempo-confirm-field': {
+      'angular-confirm-field': {
         options: {
           base: 'app/src'
         },

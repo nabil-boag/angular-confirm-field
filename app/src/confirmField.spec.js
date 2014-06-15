@@ -1,14 +1,17 @@
 /* global describe, beforeEach, it, expect, inject, angular, module */
 
 /**
- * Tests the confirm field directive.
+ * Tests the Angular Confirm Field directive.
  */
-describe('The confirm field directive', function () {
-
-  // Begin setup.
+describe('Angular Confirm Field', function () {
   var element, $scope, compiled;
 
-  beforeEach(module('tempo.common'));
+  var confrmFieldTemplate = '<form id="form" name="form">' +
+      '<input ng-confirm-field name="confirmField" ng-model="confirmvalue" ' +
+      'confirm-against="compareField"/>' +
+      '</form>';
+
+  beforeEach(module('ng.confirmField'));
 
   beforeEach(inject(function ($compile, $rootScope) {
     // Arrange.
@@ -16,17 +19,11 @@ describe('The confirm field directive', function () {
     // Get a new scope from rootscope
     $scope = $rootScope.$new();
 
-    // Add the compare-against property to the scope.
+    // Add the confirm-against property to the scope.
     $scope.compareField = 'test123';
 
-    // Create an ng-confirm-field HTML Element
-    var html = '<form id="form" name="form">' +
-      '<input name="confirmField" ng-model="confirmvalue" ng-confirm-field ' +
-      'confirm-against="compareField"/>' +
-      '</form>';
-
     // Create an element out of the HTML.
-    element = angular.element(html);
+    element = angular.element(confrmFieldTemplate);
     // Compile the element.
     compiled = $compile(element);
     // Add the compiled element to the scope.

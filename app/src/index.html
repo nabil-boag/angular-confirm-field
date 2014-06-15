@@ -2,23 +2,23 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Tempo confirm-field</title>
+    <title>Angular Confirm Field</title>
 
     <% vendorFiles.forEach(function (file) { %>
     <script type="text/javascript" src="<%= file %>"></script><% }); %>
-    <!-- Uncomment if you have some templates.
-    <script src="js/templates.js"></script>
-    -->
-    <!-- build:js(app/build) js/tempo-confirm-field.min.js -->
     <% appFiles.forEach(function (file) { %>
     <script type="text/javascript" src="<%= file %>"></script><% }); %>
-    <!-- endbuild -->
 
     <script>
-      var app = angular.module('demo', ['tempo.common'])
-        .controller('demoCtrl', ['$scope', function ($scope) {
-          $scope.confirm = '';
-        }]);
+      var app = angular
+        .module('demo', ['ng.confirmField'])
+
+        .controller('demoCtrl', [
+          '$scope',
+          function (scope) {
+            scope.emailconfirm = '';
+          }
+        ]);
     </script>
     <style>
       #form input.ng-valid {
@@ -37,8 +37,9 @@
   </head>
   <body ng-app="demo" ng-controller="demoCtrl">
     <form id="form" name="form">
-      <input name="email" ng-model="email"  />
-      <input name="confirm" ng-model="confirm" ng-confirm-field confirm-against="email" />
+      <input name="my-email" ng-model="email"  />
+      <input name="my-email-confirm" ng-model="emailconfirm" ng-confirm-field
+        confirm-against="email" />
     </form>
   </body>
 </html>
