@@ -15,20 +15,11 @@ describe('Angular Confirm Field', function () {
 
   beforeEach(inject(function ($compile, $rootScope) {
     // Arrange.
-
-    // Get a new scope from rootscope
     $scope = $rootScope.$new();
-
-    // Add the confirm-against property to the scope.
-    $scope.compareField = 'test123';
-
-    // Create an element out of the HTML.
+    $scope.compareField = 'matchingValue';
     element = angular.element(confrmFieldTemplate);
-    // Compile the element.
     compiled = $compile(element);
-    // Add the compiled element to the scope.
     compiled($scope);
-    // Digest(Update) the scope.
     $scope.$digest();
   }));
 
@@ -39,18 +30,15 @@ describe('Angular Confirm Field', function () {
    */
   it('should be valid if the confirm field matches the original value',
     inject(function () {
-
       // Arrange.
-      var testValue = 'test123';
-      // Change the confirm field to a value matching the compai
+      var testValue = 'matchingValue';
       $scope.form.confirmField.$setViewValue(testValue);
 
       // Act.
       $scope.$apply();
 
-      // Assert that the confirm field is valid.
+      // Assert.
       expect($scope.form.confirmField.$valid).toBe(true);
-
     }));
 
   /**
@@ -61,16 +49,14 @@ describe('Angular Confirm Field', function () {
     'match the compare against field.', inject(function () {
 
       // Arrange.
-      var testValue = 'test';
-      // Change the compare field to a non matching value
+      var testValue = 'differentValue';
       $scope.form.confirmField.$setViewValue(testValue);
 
       // Act.
       $scope.$apply();
 
-      // Assert that the confirm field is invalid.
+      // Assert.
       expect($scope.form.confirmField.$valid).toBe(false);
-
     }));
 
   /**
@@ -81,15 +67,14 @@ describe('Angular Confirm Field', function () {
     'doesn\'t match the compare field.', inject(function () {
 
       // Arrange.
-      var testValue = 'test123';
-      // Change the compare field to a non matching value
-      $scope.compareField = 'newvalue';
+      var testValue = 'matchingValue';
+      $scope.compareField = 'differentValue';
       $scope.form.confirmField.$setViewValue(testValue);
 
       // Act.
       $scope.$apply();
 
-      // Assert that the confirm field is invalid.
+      // Assert.
       expect($scope.form.confirmField.$valid).toBe(false);
     }));
 
@@ -105,8 +90,7 @@ describe('Angular Confirm Field', function () {
   it('should become invalid if I change the compare against field after the ' +
     'cofirm field was already valid.', inject(function () {
       // Arrange.
-      var testValue = 'test123';
-      // Change the compare field to a matching value
+      var testValue = 'matchingValue';
       $scope.form.confirmField.$setViewValue(testValue);
 
       // Act.
@@ -116,13 +100,32 @@ describe('Angular Confirm Field', function () {
       expect($scope.form.confirmField.$valid).toBe(true);
 
       // Arrange.
-      // Change the compare field to a non matching value
-      $scope.compareField = 'newvalue';
+      $scope.compareField = 'differentValue';
 
       // Act.
       $scope.$apply();
 
       // Assert that the confirm field is invalid.
       expect($scope.form.confirmField.$valid).toBe(false);
+    }));
+
+  /**
+   * Tests that the confirm field model value is undefined if it is not valid.
+   */
+  it('should have an undefined model value if the field is not valid.',
+      inject(function () {
+
+      // Arrange.
+      var testValue = 'differentValue';
+      $scope.form.confirmField.$setViewValue(testValue);
+
+      // Act.
+      $scope.$apply();
+
+      // Assert that the confirm field is valid.
+      expect($scope.form.confirmField.$valid).toBe(false);
+
+      // Assert that the confirm field model is undefined
+      expect($scope.form.confirmField.$modelValue).toBe(undefined);
     }));
 });
