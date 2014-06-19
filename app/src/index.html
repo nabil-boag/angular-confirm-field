@@ -6,9 +6,10 @@
 
     <% vendorFiles.forEach(function (file) { %>
     <script type="text/javascript" src="<%= file %>"></script><% }); %>
-    <% appFiles.forEach(function (file) { %>
-    <script type="text/javascript" src="<%= file %>"></script><% }); %>
 
+    <!-- build:js(app/build) js/angular-confirm-field.min.js -->
+    <script type="text/javascript" src="confirmField.js"></script>
+    <!-- endbuild -->
     <script>
       var app = angular
         .module('demo', ['ng.confirmField'])
