@@ -33,6 +33,12 @@
       #form.ng-invalid {
         background: red;
       }
+      #form.ng-invalid:after {
+        content: " Form invalid";
+      }
+      #form.ng-valid:after {
+        content: " Form valid";
+      }
     </style>
   </head>
   <body ng-app="demo" ng-controller="demoCtrl">
