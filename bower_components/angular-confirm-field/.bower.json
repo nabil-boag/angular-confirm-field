@@ -1,0 +1,34 @@
+{
+  "name": "angular-confirm-field",
+  "version": "0.1.0",
+  "ignore": [
+    "app/src",
+    ".bowerrc",
+    ".gitignore",
+    ".jshintrc",
+    "bower.json",
+    "Gruntfile.js",
+    "karma-unit.conf.js",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
+  "devDependencies": {
+    "angular-mocks": "~1.2.0",
+    "angular-scenario": "~1.2.0"
+  },
+  "dependencies": {
+    "angular": "~1.2.0",
+    "lodash": "*"
+  },
+  "_cacheHeaders": {
+    "ETag": "\"a0774d1998da34821f45d830ca4335ac\"",
+    "Last-Modified": "Wed, 06 Aug 2014 13:24:14 GMT",
+    "Content-Length": "3155456",
+    "Content-Type": "application/x-tar"
+  },
+  "_release": "e-tag:a0774d199",
+  "_source": "http://tempo-components.s3.amazonaws.com/tempo-confirm-field/dev/tempo-confirm-field-dev.tar",
+  "_target": "*",
+  "_originalSource": "http://tempo-components.s3.amazonaws.com/tempo-confirm-field/dev/tempo-confirm-field-dev.tar"
+}

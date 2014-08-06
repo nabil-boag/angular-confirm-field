@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Angular Confirm Field</title>
+
+    <!-- Bootstrap -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="bower_components/angular-confirm-field/js/angular-confirm-field.min.js"></script>
+
+    <style>
+      form {
+        padding: 10px;
+      }
+      form.ng-invalid {
+        background-color: #f2dede;
+      }
+      form.ng-valid {
+        background-color: #dff0d8;
+      }
+      input.ng-invalid {
+        border-color: #a94442;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      }
+      input.ng-invalid:focus {
+        border-color: #843534;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img src="logo.png" width="100">
+          </a>
+
+          <div class="media-body">
+            <h1 class="text-muted">Angular Confirm Field</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="">
+        <p class="lead">
+          Angular component which monitors specified models and updates form
+          validation as they change.
+        </p>
+
+        <p class="text-center">
+          <iframe src="http://ghbtns.com/github-btn.html?user=wongatech&repo=angular-confirm-field&type=watch&count=true"
+                  allowtransparency="true" frameborder="0" scrolling="0"
+                  width="110" height="20"></iframe>
+          <iframe src="http://ghbtns.com/github-btn.html?user=wongatech&repo=angular-confirm-field&type=fork&count=true"
+                  allowtransparency="true" frameborder="0" scrolling="0"
+                  width="110" height="20"></iframe>
+          <iframe src="http://ghbtns.com/github-btn.html?user=wongatech&repo=angular-confirm-field&type=follow&count=true"
+                  allowtransparency="true" frameborder="0" scrolling="0"
+                  width="200" height="20"></iframe>
+          <a href="https://twitter.com/share" class="twitter-share-button"
+             data-via="wongatech">Tweet</a>
+          <script>!function (d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+              if (!d.getElementById(id)) {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = p + '://platform.twitter.com/widgets.js';
+                fjs.parentNode.insertBefore(js, fjs);
+              }
+            }(document, 'script', 'twitter-wjs');</script>
+
+          <a href="https://twitter.com/wongatech"
+             class="twitter-follow-button" data-show-count="false">Follow
+            @wongatech</a>
+          <script>!function (d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+              if (!d.getElementById(id)) {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = p + '://platform.twitter.com/widgets.js';
+                fjs.parentNode.insertBefore(js, fjs);
+              }
+            }(document, 'script', 'twitter-wjs');</script>
+        </p>
+      </div>
+
+      <div class="row marketing">
+        <div ng-app="demo" ng-controller="demoCtrl">
+          <div class="page-header"><h4>Demo</h4></div>
+          <form role="form">
+            <div class="form-group">
+              <label for="exampleInputEmail">Email address</label>
+              <input ng-model="email"
+                     type="text"
+                     class="form-control"
+                     id="exampleInputEmail"
+                     placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmailConfirm">Confirm email address</label>
+              <input ng-model="emailConfirm"
+                     ng-confirm-field confirm-against="email"
+                     type="text"
+                     class="form-control"
+                     id="exampleInputEmailConfirm"
+                     placeholder="Confirm email">
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="footer text-center small" style="margin:20px;">
+        <p>© Wonga 2014 -
+          <a href="http://tech.wonga.com" role="button">
+            Wonga tech website
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <script>
+      var app = angular
+        .module('demo', ['ng.confirmField'])
+
+        .controller('demoCtrl', [
+          '$scope',
+          function (scope) {
+          }
+        ]);
+    </script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
