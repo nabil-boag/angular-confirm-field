@@ -20,23 +20,24 @@
         ]);
     </script>
     <style>
-      #form input.ng-valid {
-        color: green;
+      form {
+        padding: 10px;
       }
-      #form input.ng-invalid {
-        color: red;
+      form.ng-invalid {
+        background-color: #f2dede;
       }
-      #form.ng-valid {
-        background: green;
+      form.ng-valid {
+        background-color: #dff0d8;
       }
-      #form.ng-invalid {
-        background: red;
+      input.ng-invalid {
+        border-color: #a94442;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
       }
-      #form.ng-invalid:after {
-        content: " Form invalid";
-      }
-      #form.ng-valid:after {
-        content: " Form valid";
+      input.ng-invalid:focus {
+        border-color: #843534;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483;
       }
     </style>
   </head>
