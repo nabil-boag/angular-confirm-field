@@ -20,11 +20,11 @@ module.exports = function(config) {
     files: [
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      'confirmField.js',
-      '**/*.spec.js'
+      'bower_components/lodash/dist/lodash.js',
+      'js/**/*.js'
     ],
     preprocessors: {
-      './**/*.js': 'coverage'
+      '!(bower_components)/**/*.js': 'coverage'
     },
 
     /**
