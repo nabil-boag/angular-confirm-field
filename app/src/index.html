@@ -4,12 +4,11 @@
     <meta charset="utf-8">
     <title>Angular Confirm Field</title>
 
-    <% vendorFiles.forEach(function (file) { %>
-    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+    <script src="bower_components/lodash/dist/lodash.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="confirmField.js"></script>
 
-    <!-- build:js(app/build) js/angular-confirm-field.min.js -->
-    <script type="text/javascript" src="confirmField.js"></script>
-    <!-- endbuild -->
     <script>
       var app = angular
         .module('demo', ['ng.confirmField'])
