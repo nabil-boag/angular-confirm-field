@@ -2,7 +2,7 @@ Angular Confirm Field
 =====================
 
 Angular component which monitors specified models and sets form validation
-if the don't match.
+if they don't match.
 
 Maintainer: Nabil Boag <<nabil.boag@wonga.com>>
 
