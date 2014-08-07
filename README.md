@@ -4,6 +4,8 @@ Angular Confirm Field
 Angular component which monitors specified models and sets form validation
 if they don't match.
 
+Demo: http://wongatech.github.io/angular-confirm-field/
+
 Maintainer: Nabil Boag <<nabil.boag@wonga.com>>
 
 Installation
