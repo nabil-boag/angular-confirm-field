@@ -36,14 +36,25 @@ Add an HTML directive element with the `ng-confirm-field` directive. Add a
 confirm-against attribute specifying the model to compare this directive with.
 
 ```html
-<input ng-confirm-field ng-model="emailconfirm" confirm-against="email" name="my-email-confirm"/>
+<input ng-confirm-field ng-model="emailConfirm" confirm-against="email" name="emailConfirm"/>
 ```
 
 This can be used in conjunction with another model. For example another input
 value can be used with the above code.
 
 ```html
-<input ng-model="email" name="my-email" />
+<input ng-model="email" name="email" />
+```
+
+A full example including some error messaging:
+```html
+<form name="form">
+  <input ng-model="email" name="email" />
+  <input ng-confirm-field ng-model="emailConfirm" confirm-against="email" name="emailConfirm"/>
+  <div ng-show="form.emailConfirm.$dirty && form.emailConfirm.$invalid">
+    <span ng-show="form.emailConfirm.$error.noMatch">Fields do not match</span>
+  </div>
+</form>
 ```
 
 

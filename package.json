@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/QuickbridgeLtd/tempo-confirm-field"
+    "url": "git://github.com/wongatech/angular-confirm-field"
   },
   "author": {
     "name": "Nabil Boag",
