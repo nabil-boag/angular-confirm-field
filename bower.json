@@ -13,6 +13,7 @@
     "package.json",
     "README.md"
   ],
+  "main": "angular-confirm-field/app/package/js/angular-confirm-field.min.js",
   "devDependencies": {
     "angular-mocks": "~1.2.0",
     "angular-scenario": "~1.2.0"
