@@ -1,5 +1,4 @@
 /app/build/
-/app/package/
 /app/src/bower_components/*
 /nbproject/*
 /node_modules/*
