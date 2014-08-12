@@ -2,7 +2,7 @@
   "name": "angular-confirm-field-demo",
   "dependencies": {
     "angular": "~1.2.21",
-    "angular-confirm-field": "http://tempo-components.s3.amazonaws.com/tempo-confirm-field/dev/tempo-confirm-field-dev.tar",
+    "angular-confirm-field": "~0.1.0",
     "bootstrap": "~3.2.0",
     "lodash": "~2.4.1"
   }
