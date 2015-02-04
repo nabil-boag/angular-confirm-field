@@ -20,9 +20,6 @@ angular.module('ng.confirmField', [])
 .directive('ngConfirmField', function () {
   return {
     require: 'ngModel',
-    scope: {
-      confirmAgainst: '=',
-    },
     link: function (scope, iElement, iAttrs, ngModelCtrl) {
 
       var updateValidity = function () {
@@ -35,14 +32,21 @@ angular.module('ng.confirmField', [])
 
       // Test the confirm field view value matches the confirm against value.
       var isFieldValid = function () {
-        return ngModelCtrl.$viewValue === scope.confirmAgainst;
+        return ngModelCtrl.$viewValue === currentConfirmAgainstValue();
       };
+
+      function currentConfirmAgainstValue() {
+        return scope.$eval(iAttrs.confirmAgainst);
+      }
 
       // Convert data from view format to model format
       ngModelCtrl.$parsers.push(updateValidity);
 
       // Watch for changes in the confirmAgainst model.
       scope.$watch('confirmAgainst', updateValidity);
+      scope.$watch(function () {
+        return currentConfirmAgainstValue();
+      }, updateValidity);
     }
   };
 });
