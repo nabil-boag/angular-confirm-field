@@ -3,7 +3,6 @@
   "dependencies": {
     "angular": "~1.2.21",
     "angular-confirm-field": "~0.1.0",
-    "bootstrap": "~3.2.0",
-    "lodash": "~2.4.1"
+    "bootstrap": "~3.2.0"
   }
 }
