@@ -68,9 +68,9 @@ To contribute:
 - Fork the repo
 - Run `npm install`
 - Run `bower install`
-- Run `grunt workflow:dev` to watch for changes, lint, build and run tests as
+- Run `gulp watch` to watch for changes, lint, build and run tests as
   you're working
 - Write your unit tests for your change
-- Run `grunt package` to update the distribution files
+- Run `gulp package` to update the distribution files
 - Check that the demo app works (acceptance tests to be added)
 - Update README.md and, if necessary, the demo page
