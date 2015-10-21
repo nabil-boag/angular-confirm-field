@@ -14,46 +14,54 @@ var gulp = require('gulp'),
   Server = require('karma').Server;
 
 var APPLICATION_DIRECTORY = 'app/src',
-  APPLICATION_NAME = 'angular-confirm-field',
-  CONNECTION_PORT = 8888,
-  PACKAGE_DESTINATION = 'app/package/js';
+  CONNECTION_PORT = 8888;
 
-var paths = {
-  packageScripts: [
-    APPLICATION_DIRECTORY + '/js/**/*.js',
-    '!' + APPLICATION_DIRECTORY + '/js/**/*.spec.js'
-  ],
-  lintingScripts: [
-    '*.js',
-    APPLICATION_DIRECTORY + '/js/**/*.js',
-    APPLICATION_DIRECTORY + '/js/**/*.spec.js'
-  ]
+var config = {
+  applicationName: 'angular-confirm-field',
+  paths: {
+    karmaConfig: __dirname + '/karma-unit.conf.js',
+    packageDestination: 'app/package/js',
+    packageScripts: [
+      APPLICATION_DIRECTORY + '/js/**/*.js',
+      '!' + APPLICATION_DIRECTORY + '/js/**/*.spec.js'
+    ],
+    lintingScripts: [
+      '*.js',
+      APPLICATION_DIRECTORY + '/js/**/*.js',
+      APPLICATION_DIRECTORY + '/js/**/*.spec.js'
+    ]
+  },
+  connect: {
+    root: APPLICATION_DIRECTORY,
+    port: CONNECTION_PORT,
+    uri: 'http://localhost:' + CONNECTION_PORT
+  }
 };
 
 gulp.task('test', ['jscs', 'jshint', 'unit']);
 
 gulp.task('jscs', function () {
-  return gulp.src(paths.lintingScripts)
+  return gulp.src(config.paths.lintingScripts)
     .pipe(jscs())
     .pipe(jscs.reporter());
 });
 
 gulp.task('jshint', function () {
-  return gulp.src(paths.lintingScripts)
+  return gulp.src(config.paths.lintingScripts)
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
 gulp.task('connect', function () {
   connect.server({
-    root: APPLICATION_DIRECTORY,
-    port: 8888
+    root: config.connect.root,
+    port: config.connect.port
   });
 });
 
 gulp.task('open', function () {
   var options = {
-    uri: 'http://localhost:' + CONNECTION_PORT
+    uri: config.connect.uri
   };
   gulp.src(__filename)
     .pipe(open(options));
@@ -61,7 +69,7 @@ gulp.task('open', function () {
 
 gulp.task('unit', function (done) {
   new Server({
-    configFile: __dirname + '/karma-unit.conf.js',
+    configFile: config.paths.karmaConfig,
     singleRun: true
   }, function () {
     done();
@@ -69,24 +77,24 @@ gulp.task('unit', function (done) {
 });
 
 gulp.task('clean', function () {
-  return del([PACKAGE_DESTINATION]);
+  return del(config.paths.packageDestination);
 });
 
 gulp.task('package', ['clean'], function () {
   // Minify and copy all JavaScript (except vendor scripts)
   // with sourcemaps all the way down
-  return gulp.src(paths.packageScripts)
+  return gulp.src(config.paths.packageScripts)
   // This will output the non-minified version
-    .pipe(concat(APPLICATION_NAME + '.js'))
-    .pipe(gulp.dest(PACKAGE_DESTINATION))
+    .pipe(concat(config.applicationName + '.js'))
+    .pipe(gulp.dest(config.paths.packageDestination))
     .pipe(uglify())
     .pipe(rename({ extname: '.min.js' }))
   // This will minify and rename to *.min.js
-    .pipe(gulp.dest(PACKAGE_DESTINATION));
+    .pipe(gulp.dest(config.paths.packageDestination));
 });
 
 gulp.task('watch', ['test'], function () {
-  watch(paths.lintingScripts, batch(function (events, done) {
+  watch(config.paths.lintingScripts, batch(function (events, done) {
     gulp.start('test', done);
   }));
 });
